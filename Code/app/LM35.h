@@ -2,7 +2,7 @@
  * Module: LM35 Temperature Sensor
  * File Name: LM35.h
  * Description: Header file for LM35 temperature sensor driver
- * Author:  Youssef Alaa 
+ * Author: Youssef Alaa
  ************************************************************************************/
 #ifndef LM35_H_
 #define LM35_H_

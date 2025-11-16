@@ -2,7 +2,7 @@
  * Module: LM35 Temperature Sensor
  * File Name: LM35.c
  * Description: Implementation of LM35 driver
- * Author: Youssef Alaa 
+ * Author: Youssef Alaa
  ************************************************************************************/
 
 #include <avr/io.h>
