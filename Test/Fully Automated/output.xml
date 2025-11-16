@@ -1,0 +1,2852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.13.5 on win32)" generated="20251116 14:19:35.756" rpa="false" schemaversion="4">
+<suite id="s1" name="Test" source="F:\TKH\Semester 1\Embedded System\Project 2\Final_Sub\test.robot">
+<kw name="Open Serial Connection" type="SETUP">
+<kw name="Add Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<arg>baudrate=${BAUDRATE}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Adds new port with specified locator.</doc>
+<status status="PASS" starttime="20251116 14:19:35.831" endtime="20251116 14:19:35.835"/>
+</kw>
+<kw name="Open Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Opens specified port.</doc>
+<status status="PASS" starttime="20251116 14:19:35.835" endtime="20251116 14:19:35.835"/>
+</kw>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:35.835" endtime="20251116 14:19:35.835"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:38.836" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20251116 14:19:35.835" endtime="20251116 14:19:38.836"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Connected to ${PORT}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:38.837" endtime="20251116 14:19:38.838"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:35.831" endtime="20251116 14:19:38.838"/>
+</kw>
+<test id="s1-t1" name="1 System Initialization" line="58">
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:43.840" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20251116 14:19:38.839" endtime="20251116 14:19:43.840"/>
+</kw>
+<kw name="Read Response">
+<var>${msg}</var>
+<arg>5</arg>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:43.845" level="INFO">${resp} = === SYSTEM READY ===
+</msg>
+<status status="PASS" starttime="20251116 14:19:43.842" endtime="20251116 14:19:43.845"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:43.845" level="INFO">${resp} = === SYSTEM READY ===</msg>
+<status status="PASS" starttime="20251116 14:19:43.845" endtime="20251116 14:19:43.845"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:43.847" level="INFO">${resp} = === SYSTEM READY ===</msg>
+<status status="PASS" starttime="20251116 14:19:43.845" endtime="20251116 14:19:43.847"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:43.847" endtime="20251116 14:19:43.848"/>
+</kw>
+<msg timestamp="20251116 14:19:43.848" level="INFO">${msg} = === SYSTEM READY ===</msg>
+<status status="PASS" starttime="20251116 14:19:43.841" endtime="20251116 14:19:43.848"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${msg}</arg>
+<arg>SYSTEM READY</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:43.850" endtime="20251116 14:19:43.850"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:43.849" endtime="20251116 14:19:43.850"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:38.838" endtime="20251116 14:19:43.852"/>
+</test>
+<test id="s1-t2" name="2 Temperature Displayed on LCD" line="63">
+<kw name="Send Command">
+<arg>get_temp</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:43.856" endtime="20251116 14:19:43.857"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:43.857" endtime="20251116 14:19:43.858"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:44.359" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:43.858" endtime="20251116 14:19:44.359"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:44.359" endtime="20251116 14:19:44.360"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:43.856" endtime="20251116 14:19:44.360"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:44.364" level="INFO">${resp} = Type 'help' for commands.
+</msg>
+<status status="PASS" starttime="20251116 14:19:44.362" endtime="20251116 14:19:44.364"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:44.364" level="INFO">${resp} = Type 'help' for commands.</msg>
+<status status="PASS" starttime="20251116 14:19:44.364" endtime="20251116 14:19:44.364"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:44.365" level="INFO">${resp} = Type 'help' for commands.</msg>
+<status status="PASS" starttime="20251116 14:19:44.364" endtime="20251116 14:19:44.365"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:44.366" endtime="20251116 14:19:44.366"/>
+</kw>
+<msg timestamp="20251116 14:19:44.367" level="INFO">${resp} = Type 'help' for commands.</msg>
+<status status="PASS" starttime="20251116 14:19:44.361" endtime="20251116 14:19:44.367"/>
+</kw>
+<while condition="$resp == &quot;Type 'help' for commands.&quot; or $resp == &quot;&quot;">
+<iter>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:44.371" level="INFO">${resp} = TEMP: 57.1 (SENSOR)
+</msg>
+<status status="PASS" starttime="20251116 14:19:44.370" endtime="20251116 14:19:44.371"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:44.372" level="INFO">${resp} = TEMP: 57.1 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:44.371" endtime="20251116 14:19:44.372"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:44.373" level="INFO">${resp} = TEMP: 57.1 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:44.372" endtime="20251116 14:19:44.373"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:44.373" endtime="20251116 14:19:44.374"/>
+</kw>
+<msg timestamp="20251116 14:19:44.375" level="INFO">${resp} = TEMP: 57.1 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:44.369" endtime="20251116 14:19:44.375"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:44.368" endtime="20251116 14:19:44.375"/>
+</iter>
+<status status="PASS" starttime="20251116 14:19:44.368" endtime="20251116 14:19:44.375"/>
+</while>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>TEMP:</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:44.377" endtime="20251116 14:19:44.377"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:44.376" endtime="20251116 14:19:44.377"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:43.855" endtime="20251116 14:19:44.379"/>
+</test>
+<test id="s1-t3" name="3 Temperature Updates Every 2 Seconds" line="71">
+<kw name="Send Command">
+<arg>get_temp</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:44.383" endtime="20251116 14:19:44.383"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:44.384" endtime="20251116 14:19:44.384"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:44.886" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:44.385" endtime="20251116 14:19:44.887"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:44.887" endtime="20251116 14:19:44.888"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:44.383" endtime="20251116 14:19:44.888"/>
+</kw>
+<kw name="Read Response">
+<var>${t1}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:44.891" level="INFO">${resp} = TEMP: 56.4 (SENSOR)
+</msg>
+<status status="PASS" starttime="20251116 14:19:44.889" endtime="20251116 14:19:44.891"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:44.891" level="INFO">${resp} = TEMP: 56.4 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:44.891" endtime="20251116 14:19:44.891"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:44.892" level="INFO">${resp} = TEMP: 56.4 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:44.891" endtime="20251116 14:19:44.892"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:44.893" endtime="20251116 14:19:44.894"/>
+</kw>
+<msg timestamp="20251116 14:19:44.894" level="INFO">${t1} = TEMP: 56.4 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:44.888" endtime="20251116 14:19:44.894"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:47.396" level="INFO">Slept 2 seconds 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:44.895" endtime="20251116 14:19:47.397"/>
+</kw>
+<kw name="Send Command">
+<arg>get_temp</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:47.398" endtime="20251116 14:19:47.398"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:47.399" endtime="20251116 14:19:47.399"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:47.900" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:47.399" endtime="20251116 14:19:47.900"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:47.900" endtime="20251116 14:19:47.908"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:47.397" endtime="20251116 14:19:47.908"/>
+</kw>
+<kw name="Read Response">
+<var>${t2}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:47.910" level="INFO">${resp} = TEMP: 52.6 (SENSOR)
+</msg>
+<status status="PASS" starttime="20251116 14:19:47.909" endtime="20251116 14:19:47.910"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:47.911" level="INFO">${resp} = TEMP: 52.6 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:47.910" endtime="20251116 14:19:47.911"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:47.912" level="INFO">${resp} = TEMP: 52.6 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:47.911" endtime="20251116 14:19:47.912"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:47.912" endtime="20251116 14:19:47.913"/>
+</kw>
+<msg timestamp="20251116 14:19:47.913" level="INFO">${t2} = TEMP: 52.6 (SENSOR)</msg>
+<status status="PASS" starttime="20251116 14:19:47.909" endtime="20251116 14:19:47.913"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${t1}</arg>
+<arg>TEMP:</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:47.930" endtime="20251116 14:19:47.930"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:47.929" endtime="20251116 14:19:47.930"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${t2}</arg>
+<arg>TEMP:</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:47.931" endtime="20251116 14:19:47.931"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:47.930" endtime="20251116 14:19:47.931"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:44.382" endtime="20251116 14:19:47.931"/>
+</test>
+<test id="s1-t4" name="4 High and Low Limits Displayed" line="81">
+<kw name="Send Command">
+<arg>print_limits</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:47.933" endtime="20251116 14:19:47.933"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:47.934" endtime="20251116 14:19:47.934"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:48.435" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:47.934" endtime="20251116 14:19:48.435"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:48.435" endtime="20251116 14:19:48.436"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:47.933" endtime="20251116 14:19:48.436"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:48.438" level="INFO">${resp} = LOW:20.00HIGH:30.00
+</msg>
+<status status="PASS" starttime="20251116 14:19:48.437" endtime="20251116 14:19:48.438"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:48.438" level="INFO">${resp} = LOW:20.00HIGH:30.00</msg>
+<status status="PASS" starttime="20251116 14:19:48.438" endtime="20251116 14:19:48.438"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:48.439" level="INFO">${resp} = LOW:20.00HIGH:30.00</msg>
+<status status="PASS" starttime="20251116 14:19:48.438" endtime="20251116 14:19:48.439"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:48.439" endtime="20251116 14:19:48.439"/>
+</kw>
+<msg timestamp="20251116 14:19:48.439" level="INFO">${resp} = LOW:20.00HIGH:30.00</msg>
+<status status="PASS" starttime="20251116 14:19:48.436" endtime="20251116 14:19:48.439"/>
+</kw>
+<while condition="'${resp}' == ''">
+<iter>
+<kw name="Read Response">
+<var>${resp}</var>
+<status status="NOT RUN" starttime="20251116 14:19:48.440" endtime="20251116 14:19:48.440"/>
+</kw>
+<status status="NOT RUN" starttime="20251116 14:19:48.439" endtime="20251116 14:19:48.440"/>
+</iter>
+<status status="NOT RUN" starttime="20251116 14:19:48.439" endtime="20251116 14:19:48.440"/>
+</while>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>LOW:</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:48.440" endtime="20251116 14:19:48.440"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>HIGH:</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:48.440" endtime="20251116 14:19:48.441"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:47.932" endtime="20251116 14:19:48.441"/>
+</test>
+<test id="s1-t5" name="5 OK/NOK Display on LCD" line="91">
+<kw name="Send Command">
+<arg>set_low=20</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:48.442" endtime="20251116 14:19:48.443"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:48.443" endtime="20251116 14:19:48.443"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:48.944" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:48.443" endtime="20251116 14:19:48.944"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:48.944" endtime="20251116 14:19:48.945"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:48.442" endtime="20251116 14:19:48.945"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:48.947" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:19:48.946" endtime="20251116 14:19:48.947"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:48.948" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:48.947" endtime="20251116 14:19:48.948"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:48.949" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:48.948" endtime="20251116 14:19:48.949"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:48.949" endtime="20251116 14:19:48.950"/>
+</kw>
+<msg timestamp="20251116 14:19:48.950" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:48.946" endtime="20251116 14:19:48.950"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:48.952" endtime="20251116 14:19:48.953"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:48.951" endtime="20251116 14:19:48.953"/>
+</kw>
+<kw name="Send Command">
+<arg>set_high=30</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:48.956" endtime="20251116 14:19:48.965"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:48.966" endtime="20251116 14:19:48.967"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:49.469" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:48.967" endtime="20251116 14:19:49.469"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:49.470" endtime="20251116 14:19:49.471"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:48.954" endtime="20251116 14:19:49.471"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:49.473" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:19:49.472" endtime="20251116 14:19:49.473"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:49.474" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:49.473" endtime="20251116 14:19:49.474"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:49.475" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:49.474" endtime="20251116 14:19:49.475"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:49.475" endtime="20251116 14:19:49.476"/>
+</kw>
+<msg timestamp="20251116 14:19:49.476" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:49.472" endtime="20251116 14:19:49.477"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:49.479" endtime="20251116 14:19:49.479"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:49.477" endtime="20251116 14:19:49.480"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:50.482" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20251116 14:19:49.481" endtime="20251116 14:19:50.483"/>
+</kw>
+<kw name="Send Command">
+<arg>set_temp=25</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:50.484" endtime="20251116 14:19:50.485"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:50.485" endtime="20251116 14:19:50.486"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:50.987" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:50.486" endtime="20251116 14:19:50.987"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:50.988" endtime="20251116 14:19:50.989"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:50.483" endtime="20251116 14:19:50.989"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:50.993" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:19:50.991" endtime="20251116 14:19:50.993"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:50.993" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:50.993" endtime="20251116 14:19:50.993"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:50.995" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:50.993" endtime="20251116 14:19:50.995"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:50.995" endtime="20251116 14:19:50.996"/>
+</kw>
+<msg timestamp="20251116 14:19:50.996" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:50.990" endtime="20251116 14:19:50.996"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:50.998" endtime="20251116 14:19:50.999"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:50.998" endtime="20251116 14:19:50.999"/>
+</kw>
+<kw name="Send Command">
+<arg>read_lcd</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:51.002" endtime="20251116 14:19:51.003"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:51.004" endtime="20251116 14:19:51.005"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:51.506" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:51.005" endtime="20251116 14:19:51.506"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:51.506" endtime="20251116 14:19:51.507"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:51.000" endtime="20251116 14:19:51.508"/>
+</kw>
+<kw name="Read Response">
+<var>${lcd}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:51.511" level="INFO">${resp} = LCD:Temp: 25      OK|LL:20 LH:30
+</msg>
+<status status="PASS" starttime="20251116 14:19:51.509" endtime="20251116 14:19:51.511"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:51.512" level="INFO">${resp} = LCD:Temp: 25      OK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:51.511" endtime="20251116 14:19:51.512"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:51.513" level="INFO">${resp} = LCD:Temp: 25      OK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:51.512" endtime="20251116 14:19:51.513"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:51.513" endtime="20251116 14:19:51.514"/>
+</kw>
+<msg timestamp="20251116 14:19:51.515" level="INFO">${lcd} = LCD:Temp: 25      OK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:51.509" endtime="20251116 14:19:51.515"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${lcd}</arg>
+<arg>LCD:</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:51.515" endtime="20251116 14:19:51.516"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${lcd}</arg>
+<arg>OK</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:51.516" endtime="20251116 14:19:51.517"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${lcd}</arg>
+<arg>Temp: 25</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:51.518" endtime="20251116 14:19:51.519"/>
+</kw>
+<kw name="Send Command">
+<arg>set_temp=15</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:51.521" endtime="20251116 14:19:51.522"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:51.522" endtime="20251116 14:19:51.523"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:52.024" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:51.523" endtime="20251116 14:19:52.025"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:52.025" endtime="20251116 14:19:52.026"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:51.520" endtime="20251116 14:19:52.026"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:52.030" level="INFO">${resp} = OK: Temp set to  15.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:19:52.028" endtime="20251116 14:19:52.030"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:52.030" level="INFO">${resp} = OK: Temp set to  15.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:52.030" endtime="20251116 14:19:52.030"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:52.032" level="INFO">${resp} = OK: Temp set to  15.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:52.030" endtime="20251116 14:19:52.032"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:52.032" endtime="20251116 14:19:52.033"/>
+</kw>
+<msg timestamp="20251116 14:19:52.033" level="INFO">${resp} = OK: Temp set to  15.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:52.027" endtime="20251116 14:19:52.033"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:52.036" endtime="20251116 14:19:52.037"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:52.035" endtime="20251116 14:19:52.037"/>
+</kw>
+<kw name="Send Command">
+<arg>read_lcd</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:52.041" endtime="20251116 14:19:52.041"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:52.042" endtime="20251116 14:19:52.043"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:52.544" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:52.043" endtime="20251116 14:19:52.544"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:52.544" endtime="20251116 14:19:52.545"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:52.039" endtime="20251116 14:19:52.545"/>
+</kw>
+<kw name="Read Response">
+<var>${lcd}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:52.549" level="INFO">${resp} = LCD:Temp: 15     NOK|LL:20 LH:30
+</msg>
+<status status="PASS" starttime="20251116 14:19:52.547" endtime="20251116 14:19:52.549"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:52.550" level="INFO">${resp} = LCD:Temp: 15     NOK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:52.550" endtime="20251116 14:19:52.550"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:52.551" level="INFO">${resp} = LCD:Temp: 15     NOK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:52.550" endtime="20251116 14:19:52.551"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:52.551" endtime="20251116 14:19:52.552"/>
+</kw>
+<msg timestamp="20251116 14:19:52.553" level="INFO">${lcd} = LCD:Temp: 15     NOK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:52.546" endtime="20251116 14:19:52.553"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${lcd}</arg>
+<arg>NOK</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:52.554" endtime="20251116 14:19:52.554"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${lcd}</arg>
+<arg>Temp: 15</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:52.555" endtime="20251116 14:19:52.556"/>
+</kw>
+<kw name="Send Command">
+<arg>set_temp=35</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:52.558" endtime="20251116 14:19:52.559"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:52.559" endtime="20251116 14:19:52.560"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:53.061" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:52.560" endtime="20251116 14:19:53.062"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:53.062" endtime="20251116 14:19:53.063"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:52.557" endtime="20251116 14:19:53.063"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:53.066" level="INFO">${resp} = OK: Temp set to  35.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:19:53.064" endtime="20251116 14:19:53.066"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:53.067" level="INFO">${resp} = OK: Temp set to  35.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:53.066" endtime="20251116 14:19:53.067"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:53.068" level="INFO">${resp} = OK: Temp set to  35.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:53.067" endtime="20251116 14:19:53.068"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:53.068" endtime="20251116 14:19:53.069"/>
+</kw>
+<msg timestamp="20251116 14:19:53.069" level="INFO">${resp} = OK: Temp set to  35.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:53.064" endtime="20251116 14:19:53.070"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:53.071" endtime="20251116 14:19:53.072"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:53.070" endtime="20251116 14:19:53.072"/>
+</kw>
+<kw name="Send Command">
+<arg>read_lcd</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:53.074" endtime="20251116 14:19:53.074"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:53.075" endtime="20251116 14:19:53.076"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:53.577" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:53.076" endtime="20251116 14:19:53.578"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:53.578" endtime="20251116 14:19:53.578"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:53.073" endtime="20251116 14:19:53.578"/>
+</kw>
+<kw name="Read Response">
+<var>${lcd}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:53.581" level="INFO">${resp} = LCD:Temp: 35     NOK|LL:20 LH:30
+</msg>
+<status status="PASS" starttime="20251116 14:19:53.579" endtime="20251116 14:19:53.581"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:53.582" level="INFO">${resp} = LCD:Temp: 35     NOK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:53.582" endtime="20251116 14:19:53.582"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:53.583" level="INFO">${resp} = LCD:Temp: 35     NOK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:53.582" endtime="20251116 14:19:53.583"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:53.583" endtime="20251116 14:19:53.584"/>
+</kw>
+<msg timestamp="20251116 14:19:53.584" level="INFO">${lcd} = LCD:Temp: 35     NOK|LL:20 LH:30</msg>
+<status status="PASS" starttime="20251116 14:19:53.579" endtime="20251116 14:19:53.584"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${lcd}</arg>
+<arg>NOK</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:53.584" endtime="20251116 14:19:53.585"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${lcd}</arg>
+<arg>Temp: 35</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:53.585" endtime="20251116 14:19:53.586"/>
+</kw>
+<kw name="Send Command">
+<arg>set_temp=25</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:53.587" endtime="20251116 14:19:53.588"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:53.588" endtime="20251116 14:19:53.589"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:54.090" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:53.589" endtime="20251116 14:19:54.090"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:54.090" endtime="20251116 14:19:54.091"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:53.586" endtime="20251116 14:19:54.091"/>
+</kw>
+<doc>Verify OK appears when temp is in range, NOK when out</doc>
+<status status="PASS" starttime="20251116 14:19:48.441" endtime="20251116 14:19:54.092"/>
+</test>
+<test id="s1-t6" name="6 Decimal Temperature Values Accepted" line="134">
+<kw name="Send Command">
+<arg>set_temp=27.5</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:54.095" endtime="20251116 14:19:54.095"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:54.096" endtime="20251116 14:19:54.096"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:54.597" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:54.096" endtime="20251116 14:19:54.597"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:54.597" endtime="20251116 14:19:54.598"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:54.095" endtime="20251116 14:19:54.598"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:54.601" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:19:54.600" endtime="20251116 14:19:54.601"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:54.602" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:54.602" endtime="20251116 14:19:54.602"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:54.603" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:54.602" endtime="20251116 14:19:54.603"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:54.603" endtime="20251116 14:19:54.604"/>
+</kw>
+<msg timestamp="20251116 14:19:54.604" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:54.599" endtime="20251116 14:19:54.604"/>
+</kw>
+<while condition="&quot;OK&quot; not in $resp">
+<iter>
+<kw name="Read Response">
+<var>${resp}</var>
+<status status="NOT RUN" starttime="20251116 14:19:54.605" endtime="20251116 14:19:54.605"/>
+</kw>
+<status status="NOT RUN" starttime="20251116 14:19:54.605" endtime="20251116 14:19:54.605"/>
+</iter>
+<status status="NOT RUN" starttime="20251116 14:19:54.604" endtime="20251116 14:19:54.605"/>
+</while>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:54.607" endtime="20251116 14:19:54.607"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:54.606" endtime="20251116 14:19:54.607"/>
+</kw>
+<kw name="Send Command">
+<arg>get_temp</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:54.608" endtime="20251116 14:19:54.608"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:54.609" endtime="20251116 14:19:54.609"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:55.110" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:54.609" endtime="20251116 14:19:55.110"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:55.110" endtime="20251116 14:19:55.111"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:54.608" endtime="20251116 14:19:55.111"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:55.113" level="INFO">${resp} = OK: Temp set to  27.5 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:19:55.112" endtime="20251116 14:19:55.113"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:55.114" level="INFO">${resp} = OK: Temp set to  27.5 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:55.113" endtime="20251116 14:19:55.114"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:55.115" level="INFO">${resp} = OK: Temp set to  27.5 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:55.114" endtime="20251116 14:19:55.115"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:55.115" endtime="20251116 14:19:55.115"/>
+</kw>
+<msg timestamp="20251116 14:19:55.115" level="INFO">${resp} = OK: Temp set to  27.5 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:55.112" endtime="20251116 14:19:55.115"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>27.5</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:55.116" endtime="20251116 14:19:55.116"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:54.094" endtime="20251116 14:19:55.116"/>
+</test>
+<test id="s1-t7" name="7 High Limit Increases" line="146">
+<kw name="Send Command">
+<arg>set_high=31</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:55.119" endtime="20251116 14:19:55.120"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:55.121" endtime="20251116 14:19:55.122"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:55.623" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:55.122" endtime="20251116 14:19:55.623"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:55.623" endtime="20251116 14:19:55.624"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:55.118" endtime="20251116 14:19:55.624"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:55.625" level="INFO">${resp} = TEMP: 27.5 (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:19:55.625" endtime="20251116 14:19:55.625"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:55.626" level="INFO">${resp} = TEMP: 27.5 (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:55.626" endtime="20251116 14:19:55.626"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:55.626" level="INFO">${resp} = TEMP: 27.5 (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:55.626" endtime="20251116 14:19:55.626"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:55.626" endtime="20251116 14:19:55.627"/>
+</kw>
+<msg timestamp="20251116 14:19:55.627" level="INFO">${resp} = TEMP: 27.5 (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:55.625" endtime="20251116 14:19:55.627"/>
+</kw>
+<while condition="&quot;OK&quot; not in $resp">
+<iter>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:55.629" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:19:55.628" endtime="20251116 14:19:55.629"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:55.629" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:55.629" endtime="20251116 14:19:55.629"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:55.630" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:55.629" endtime="20251116 14:19:55.630"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:55.630" endtime="20251116 14:19:55.630"/>
+</kw>
+<msg timestamp="20251116 14:19:55.631" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:55.627" endtime="20251116 14:19:55.631"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:55.627" endtime="20251116 14:19:55.631"/>
+</iter>
+<status status="PASS" starttime="20251116 14:19:55.627" endtime="20251116 14:19:55.631"/>
+</while>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:55.632" endtime="20251116 14:19:55.632"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:55.631" endtime="20251116 14:19:55.632"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:55.118" endtime="20251116 14:19:55.632"/>
+</test>
+<test id="s1-t8" name="8 High Limit Decreases" line="154">
+<kw name="Send Command">
+<arg>set_high=29</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:55.634" endtime="20251116 14:19:55.634"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:55.634" endtime="20251116 14:19:55.635"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:56.136" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:55.635" endtime="20251116 14:19:56.136"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:56.136" endtime="20251116 14:19:56.137"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:55.633" endtime="20251116 14:19:56.137"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:56.138" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:19:56.138" endtime="20251116 14:19:56.138"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:56.138" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:56.138" endtime="20251116 14:19:56.139"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:56.140" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:56.139" endtime="20251116 14:19:56.140"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:56.140" endtime="20251116 14:19:56.140"/>
+</kw>
+<msg timestamp="20251116 14:19:56.141" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:56.137" endtime="20251116 14:19:56.141"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:56.141" endtime="20251116 14:19:56.141"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:56.141" endtime="20251116 14:19:56.142"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:55.633" endtime="20251116 14:19:56.142"/>
+</test>
+<test id="s1-t9" name="9 Low Limit Increases" line="159">
+<kw name="Send Command">
+<arg>set_low=21</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:56.144" endtime="20251116 14:19:56.145"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:56.145" endtime="20251116 14:19:56.145"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:56.647" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:56.145" endtime="20251116 14:19:56.647"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:56.648" endtime="20251116 14:19:56.649"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:56.144" endtime="20251116 14:19:56.649"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:56.651" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:19:56.650" endtime="20251116 14:19:56.651"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:56.651" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:56.651" endtime="20251116 14:19:56.651"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:56.653" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:56.652" endtime="20251116 14:19:56.653"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:56.653" endtime="20251116 14:19:56.654"/>
+</kw>
+<msg timestamp="20251116 14:19:56.654" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:56.649" endtime="20251116 14:19:56.654"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:56.656" endtime="20251116 14:19:56.657"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:56.655" endtime="20251116 14:19:56.657"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:56.143" endtime="20251116 14:19:56.658"/>
+</test>
+<test id="s1-t10" name="10 Low Limit Decreases" line="164">
+<kw name="Send Command">
+<arg>set_low=19</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:56.663" endtime="20251116 14:19:56.663"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:56.664" endtime="20251116 14:19:56.665"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:57.166" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:56.665" endtime="20251116 14:19:57.166"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:57.166" endtime="20251116 14:19:57.167"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:56.662" endtime="20251116 14:19:57.167"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:57.170" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:19:57.169" endtime="20251116 14:19:57.170"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:57.170" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:57.170" endtime="20251116 14:19:57.170"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:57.173" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:57.171" endtime="20251116 14:19:57.173"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:57.173" endtime="20251116 14:19:57.174"/>
+</kw>
+<msg timestamp="20251116 14:19:57.175" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:57.168" endtime="20251116 14:19:57.175"/>
+</kw>
+<kw name="Verify Contains">
+<arg>${resp}</arg>
+<arg>OK</arg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${text}</arg>
+<arg>${expected}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:57.177" endtime="20251116 14:19:57.177"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:57.176" endtime="20251116 14:19:57.177"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:56.661" endtime="20251116 14:19:57.178"/>
+</test>
+<test id="s1-t11" name="11 LEDs Off in Safe Range" line="169">
+<kw name="Send Command">
+<arg>set_temp=25</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:57.182" endtime="20251116 14:19:57.183"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:57.183" endtime="20251116 14:19:57.184"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:57.684" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:57.184" endtime="20251116 14:19:57.685"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:57.685" endtime="20251116 14:19:57.686"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:57.181" endtime="20251116 14:19:57.686"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:57.690" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:19:57.688" endtime="20251116 14:19:57.690"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:57.691" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:57.690" endtime="20251116 14:19:57.691"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:57.692" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:57.691" endtime="20251116 14:19:57.692"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:57.692" endtime="20251116 14:19:57.693"/>
+</kw>
+<msg timestamp="20251116 14:19:57.694" level="INFO">${resp} = OK: Temp set to  25.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:57.687" endtime="20251116 14:19:57.694"/>
+</kw>
+<while condition="&quot;OK&quot; not in $resp">
+<iter>
+<kw name="Read Response">
+<var>${resp}</var>
+<status status="NOT RUN" starttime="20251116 14:19:57.695" endtime="20251116 14:19:57.695"/>
+</kw>
+<status status="NOT RUN" starttime="20251116 14:19:57.694" endtime="20251116 14:19:57.695"/>
+</iter>
+<status status="NOT RUN" starttime="20251116 14:19:57.694" endtime="20251116 14:19:57.696"/>
+</while>
+<kw name="Verify Status">
+<arg>OFF</arg>
+<arg>OFF</arg>
+<arg>OFF</arg>
+<kw name="Get Status">
+<var>${status}</var>
+<kw name="Send Command">
+<arg>get_status</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:57.699" endtime="20251116 14:19:57.699"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:57.699" endtime="20251116 14:19:57.700"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:58.202" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:57.700" endtime="20251116 14:19:58.202"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:58.202" endtime="20251116 14:19:58.203"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:57.698" endtime="20251116 14:19:58.203"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:58.208" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF
+</msg>
+<status status="PASS" starttime="20251116 14:19:58.204" endtime="20251116 14:19:58.208"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:58.209" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:19:58.208" endtime="20251116 14:19:58.209"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:58.210" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:19:58.209" endtime="20251116 14:19:58.210"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:58.210" endtime="20251116 14:19:58.211"/>
+</kw>
+<msg timestamp="20251116 14:19:58.212" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:19:58.203" endtime="20251116 14:19:58.212"/>
+</kw>
+<msg timestamp="20251116 14:19:58.212" level="INFO">${status} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:19:57.698" endtime="20251116 14:19:58.212"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>BLUE=${expected_blue}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:58.213" endtime="20251116 14:19:58.213"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>RED=${expected_red}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:58.214" endtime="20251116 14:19:58.214"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAN_AND_BUZZER=${expected_fan_buzzer}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:58.214" endtime="20251116 14:19:58.215"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:57.697" endtime="20251116 14:19:58.215"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:57.180" endtime="20251116 14:19:58.215"/>
+</test>
+<test id="s1-t12" name="12 Blue LED ON Below Low Limit" line="177">
+<kw name="Send Command">
+<arg>set_temp=17</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:58.219" endtime="20251116 14:19:58.219"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:58.219" endtime="20251116 14:19:58.220"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:58.721" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:58.220" endtime="20251116 14:19:58.721"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:58.722" endtime="20251116 14:19:58.723"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:58.218" endtime="20251116 14:19:58.723"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:58.727" level="INFO">${resp} = OK: Temp set to  17.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:19:58.725" endtime="20251116 14:19:58.727"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:58.728" level="INFO">${resp} = OK: Temp set to  17.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:58.727" endtime="20251116 14:19:58.728"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:58.729" level="INFO">${resp} = OK: Temp set to  17.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:58.728" endtime="20251116 14:19:58.729"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:58.729" endtime="20251116 14:19:58.730"/>
+</kw>
+<msg timestamp="20251116 14:19:58.731" level="INFO">${resp} = OK: Temp set to  17.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:19:58.725" endtime="20251116 14:19:58.731"/>
+</kw>
+<kw name="Verify Status">
+<arg>ON</arg>
+<arg>OFF</arg>
+<arg>OFF</arg>
+<kw name="Get Status">
+<var>${status}</var>
+<kw name="Send Command">
+<arg>get_status</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:58.733" endtime="20251116 14:19:58.734"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:58.734" endtime="20251116 14:19:58.735"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:59.236" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:58.735" endtime="20251116 14:19:59.236"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:59.237" endtime="20251116 14:19:59.238"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:58.733" endtime="20251116 14:19:59.238"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:59.241" level="INFO">${resp} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF
+</msg>
+<status status="PASS" starttime="20251116 14:19:59.239" endtime="20251116 14:19:59.241"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:59.241" level="INFO">${resp} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:19:59.241" endtime="20251116 14:19:59.242"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:59.243" level="INFO">${resp} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:19:59.242" endtime="20251116 14:19:59.243"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:59.243" endtime="20251116 14:19:59.244"/>
+</kw>
+<msg timestamp="20251116 14:19:59.244" level="INFO">${resp} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:19:59.238" endtime="20251116 14:19:59.244"/>
+</kw>
+<msg timestamp="20251116 14:19:59.245" level="INFO">${status} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:19:58.732" endtime="20251116 14:19:59.245"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>BLUE=${expected_blue}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:59.245" endtime="20251116 14:19:59.246"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>RED=${expected_red}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:59.246" endtime="20251116 14:19:59.247"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAN_AND_BUZZER=${expected_fan_buzzer}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:19:59.247" endtime="20251116 14:19:59.248"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:58.732" endtime="20251116 14:19:59.249"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:58.217" endtime="20251116 14:19:59.249"/>
+</test>
+<test id="s1-t13" name="13 Blue LED Turns On At Exact Low Limit" line="182">
+<kw name="Send Command">
+<arg>set_low=20</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:59.255" endtime="20251116 14:19:59.256"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:59.256" endtime="20251116 14:19:59.258"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:19:59.761" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:59.259" endtime="20251116 14:19:59.761"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:59.762" endtime="20251116 14:19:59.762"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:59.254" endtime="20251116 14:19:59.763"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:19:59.764" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:19:59.764" endtime="20251116 14:19:59.765"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:19:59.766" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:59.765" endtime="20251116 14:19:59.766"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:19:59.767" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:59.766" endtime="20251116 14:19:59.768"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:19:59.768" endtime="20251116 14:19:59.768"/>
+</kw>
+<msg timestamp="20251116 14:19:59.769" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:19:59.763" endtime="20251116 14:19:59.769"/>
+</kw>
+<while condition="&quot;OK&quot; not in $resp">
+<iter>
+<kw name="Read Response">
+<var>${resp}</var>
+<status status="NOT RUN" starttime="20251116 14:19:59.772" endtime="20251116 14:19:59.772"/>
+</kw>
+<status status="NOT RUN" starttime="20251116 14:19:59.770" endtime="20251116 14:19:59.772"/>
+</iter>
+<status status="NOT RUN" starttime="20251116 14:19:59.769" endtime="20251116 14:19:59.772"/>
+</while>
+<kw name="Send Command">
+<arg>set_temp=20</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:19:59.777" endtime="20251116 14:19:59.778"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:19:59.778" endtime="20251116 14:19:59.778"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:00.280" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:19:59.779" endtime="20251116 14:20:00.280"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:00.280" endtime="20251116 14:20:00.281"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:59.775" endtime="20251116 14:20:00.281"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:00.284" level="INFO">${resp} = OK: Temp set to  20.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:20:00.282" endtime="20251116 14:20:00.284"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:00.285" level="INFO">${resp} = OK: Temp set to  20.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:00.284" endtime="20251116 14:20:00.285"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:00.286" level="INFO">${resp} = OK: Temp set to  20.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:00.285" endtime="20251116 14:20:00.286"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:00.286" endtime="20251116 14:20:00.287"/>
+</kw>
+<msg timestamp="20251116 14:20:00.288" level="INFO">${resp} = OK: Temp set to  20.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:00.282" endtime="20251116 14:20:00.288"/>
+</kw>
+<kw name="Verify Status">
+<arg>ON</arg>
+<arg>OFF</arg>
+<arg>OFF</arg>
+<kw name="Get Status">
+<var>${status}</var>
+<kw name="Send Command">
+<arg>get_status</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:00.291" endtime="20251116 14:20:00.292"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:00.292" endtime="20251116 14:20:00.293"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:00.795" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:00.293" endtime="20251116 14:20:00.795"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:00.795" endtime="20251116 14:20:00.796"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:00.290" endtime="20251116 14:20:00.796"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:00.799" level="INFO">${resp} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF
+</msg>
+<status status="PASS" starttime="20251116 14:20:00.797" endtime="20251116 14:20:00.800"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:00.800" level="INFO">${resp} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:00.800" endtime="20251116 14:20:00.800"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:00.802" level="INFO">${resp} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:00.800" endtime="20251116 14:20:00.802"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:00.802" endtime="20251116 14:20:00.804"/>
+</kw>
+<msg timestamp="20251116 14:20:00.805" level="INFO">${resp} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:00.797" endtime="20251116 14:20:00.805"/>
+</kw>
+<msg timestamp="20251116 14:20:00.805" level="INFO">${status} = LED_STATUS: BLUE=ONRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:00.290" endtime="20251116 14:20:00.805"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>BLUE=${expected_blue}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:00.805" endtime="20251116 14:20:00.806"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>RED=${expected_red}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:00.807" endtime="20251116 14:20:00.808"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAN_AND_BUZZER=${expected_fan_buzzer}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:00.809" endtime="20251116 14:20:00.810"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:00.289" endtime="20251116 14:20:00.810"/>
+</kw>
+<status status="PASS" starttime="20251116 14:19:59.252" endtime="20251116 14:20:00.811"/>
+</test>
+<test id="s1-t14" name="14 Blue LED Off above Low Limit" line="193">
+<kw name="Send Command">
+<arg>set_temp=21</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:00.820" endtime="20251116 14:20:00.820"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:00.820" endtime="20251116 14:20:00.821"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:01.322" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:00.821" endtime="20251116 14:20:01.323"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:01.323" endtime="20251116 14:20:01.324"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:00.819" endtime="20251116 14:20:01.324"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:01.328" level="INFO">${resp} = OK: Temp set to  21.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:20:01.326" endtime="20251116 14:20:01.328"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:01.328" level="INFO">${resp} = OK: Temp set to  21.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:01.328" endtime="20251116 14:20:01.328"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:01.330" level="INFO">${resp} = OK: Temp set to  21.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:01.329" endtime="20251116 14:20:01.330"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:01.330" endtime="20251116 14:20:01.331"/>
+</kw>
+<msg timestamp="20251116 14:20:01.331" level="INFO">${resp} = OK: Temp set to  21.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:01.325" endtime="20251116 14:20:01.331"/>
+</kw>
+<kw name="Verify Status">
+<arg>OFF</arg>
+<arg>OFF</arg>
+<arg>OFF</arg>
+<kw name="Get Status">
+<var>${status}</var>
+<kw name="Send Command">
+<arg>get_status</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:01.333" endtime="20251116 14:20:01.334"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:01.334" endtime="20251116 14:20:01.335"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:01.836" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:01.335" endtime="20251116 14:20:01.836"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:01.837" endtime="20251116 14:20:01.838"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:01.333" endtime="20251116 14:20:01.838"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:01.841" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF
+</msg>
+<status status="PASS" starttime="20251116 14:20:01.839" endtime="20251116 14:20:01.842"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:01.842" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:01.842" endtime="20251116 14:20:01.842"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:01.844" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:01.843" endtime="20251116 14:20:01.844"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:01.844" endtime="20251116 14:20:01.845"/>
+</kw>
+<msg timestamp="20251116 14:20:01.846" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:01.839" endtime="20251116 14:20:01.846"/>
+</kw>
+<msg timestamp="20251116 14:20:01.846" level="INFO">${status} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:01.333" endtime="20251116 14:20:01.846"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>BLUE=${expected_blue}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:01.847" endtime="20251116 14:20:01.847"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>RED=${expected_red}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:01.847" endtime="20251116 14:20:01.848"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAN_AND_BUZZER=${expected_fan_buzzer}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:01.848" endtime="20251116 14:20:01.849"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:01.332" endtime="20251116 14:20:01.849"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:00.818" endtime="20251116 14:20:01.850"/>
+</test>
+<test id="s1-t15" name="15 Red LED, Fan and Buzzer ON Above High Limit" line="198">
+<kw name="Send Command">
+<arg>set_temp=36</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:01.857" endtime="20251116 14:20:01.857"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:01.857" endtime="20251116 14:20:01.858"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:02.360" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:01.859" endtime="20251116 14:20:02.360"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:02.360" endtime="20251116 14:20:02.361"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:01.856" endtime="20251116 14:20:02.361"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:02.364" level="INFO">${resp} = OK: Temp set to  36.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:20:02.362" endtime="20251116 14:20:02.364"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:02.365" level="INFO">${resp} = OK: Temp set to  36.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:02.364" endtime="20251116 14:20:02.365"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:02.366" level="INFO">${resp} = OK: Temp set to  36.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:02.365" endtime="20251116 14:20:02.366"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:02.366" endtime="20251116 14:20:02.367"/>
+</kw>
+<msg timestamp="20251116 14:20:02.367" level="INFO">${resp} = OK: Temp set to  36.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:02.362" endtime="20251116 14:20:02.367"/>
+</kw>
+<kw name="Verify Status">
+<arg>OFF</arg>
+<arg>ON</arg>
+<arg>ON</arg>
+<kw name="Get Status">
+<var>${status}</var>
+<kw name="Send Command">
+<arg>get_status</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:02.370" endtime="20251116 14:20:02.371"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:02.371" endtime="20251116 14:20:02.372"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:02.874" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:02.373" endtime="20251116 14:20:02.874"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:02.874" endtime="20251116 14:20:02.875"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:02.369" endtime="20251116 14:20:02.875"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:02.878" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON
+</msg>
+<status status="PASS" starttime="20251116 14:20:02.876" endtime="20251116 14:20:02.878"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:02.879" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON</msg>
+<status status="PASS" starttime="20251116 14:20:02.879" endtime="20251116 14:20:02.879"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:02.881" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON</msg>
+<status status="PASS" starttime="20251116 14:20:02.879" endtime="20251116 14:20:02.881"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:02.881" endtime="20251116 14:20:02.884"/>
+</kw>
+<msg timestamp="20251116 14:20:02.884" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON</msg>
+<status status="PASS" starttime="20251116 14:20:02.875" endtime="20251116 14:20:02.884"/>
+</kw>
+<msg timestamp="20251116 14:20:02.884" level="INFO">${status} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON</msg>
+<status status="PASS" starttime="20251116 14:20:02.369" endtime="20251116 14:20:02.885"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>BLUE=${expected_blue}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:02.885" endtime="20251116 14:20:02.885"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>RED=${expected_red}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:02.885" endtime="20251116 14:20:02.886"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAN_AND_BUZZER=${expected_fan_buzzer}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:02.886" endtime="20251116 14:20:02.887"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:02.368" endtime="20251116 14:20:02.887"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:01.855" endtime="20251116 14:20:02.888"/>
+</test>
+<test id="s1-t16" name="16 Red LED, Fan and Buzzer Turn On At Exact High Limit" line="203">
+<kw name="Send Command">
+<arg>set_low=20</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:02.894" endtime="20251116 14:20:02.894"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:02.894" endtime="20251116 14:20:02.895"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:03.397" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:02.895" endtime="20251116 14:20:03.397"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:03.397" endtime="20251116 14:20:03.400"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:02.893" endtime="20251116 14:20:03.400"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:03.403" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:20:03.402" endtime="20251116 14:20:03.403"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:03.403" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:20:03.403" endtime="20251116 14:20:03.403"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:03.405" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:20:03.404" endtime="20251116 14:20:03.405"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:03.405" endtime="20251116 14:20:03.406"/>
+</kw>
+<msg timestamp="20251116 14:20:03.406" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:20:03.401" endtime="20251116 14:20:03.407"/>
+</kw>
+<while condition="&quot;OK&quot; not in $resp">
+<iter>
+<kw name="Read Response">
+<var>${resp}</var>
+<status status="NOT RUN" starttime="20251116 14:20:03.408" endtime="20251116 14:20:03.408"/>
+</kw>
+<status status="NOT RUN" starttime="20251116 14:20:03.407" endtime="20251116 14:20:03.409"/>
+</iter>
+<status status="NOT RUN" starttime="20251116 14:20:03.407" endtime="20251116 14:20:03.409"/>
+</while>
+<kw name="Send Command">
+<arg>set_high=30</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:03.410" endtime="20251116 14:20:03.411"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:03.412" endtime="20251116 14:20:03.413"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:03.914" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:03.413" endtime="20251116 14:20:03.915"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:03.915" endtime="20251116 14:20:03.916"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:03.410" endtime="20251116 14:20:03.916"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:03.918" level="INFO">${resp} = OK
+</msg>
+<status status="PASS" starttime="20251116 14:20:03.917" endtime="20251116 14:20:03.918"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:03.919" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:20:03.918" endtime="20251116 14:20:03.919"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:03.920" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:20:03.919" endtime="20251116 14:20:03.920"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:03.921" endtime="20251116 14:20:03.922"/>
+</kw>
+<msg timestamp="20251116 14:20:03.923" level="INFO">${resp} = OK</msg>
+<status status="PASS" starttime="20251116 14:20:03.917" endtime="20251116 14:20:03.923"/>
+</kw>
+<while condition="&quot;OK&quot; not in $resp">
+<iter>
+<kw name="Read Response">
+<var>${resp}</var>
+<status status="NOT RUN" starttime="20251116 14:20:03.925" endtime="20251116 14:20:03.925"/>
+</kw>
+<status status="NOT RUN" starttime="20251116 14:20:03.923" endtime="20251116 14:20:03.925"/>
+</iter>
+<status status="NOT RUN" starttime="20251116 14:20:03.923" endtime="20251116 14:20:03.925"/>
+</while>
+<kw name="Send Command">
+<arg>set_temp=30</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:03.929" endtime="20251116 14:20:03.930"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:03.930" endtime="20251116 14:20:03.931"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:04.433" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:03.931" endtime="20251116 14:20:04.433"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:04.434" endtime="20251116 14:20:04.435"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:03.926" endtime="20251116 14:20:04.435"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:04.438" level="INFO">${resp} = OK: Temp set to  30.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:20:04.436" endtime="20251116 14:20:04.438"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:04.439" level="INFO">${resp} = OK: Temp set to  30.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:04.438" endtime="20251116 14:20:04.439"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:04.440" level="INFO">${resp} = OK: Temp set to  30.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:04.439" endtime="20251116 14:20:04.440"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:04.440" endtime="20251116 14:20:04.441"/>
+</kw>
+<msg timestamp="20251116 14:20:04.442" level="INFO">${resp} = OK: Temp set to  30.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:04.436" endtime="20251116 14:20:04.442"/>
+</kw>
+<kw name="Verify Status">
+<arg>OFF</arg>
+<arg>ON</arg>
+<arg>ON</arg>
+<kw name="Get Status">
+<var>${status}</var>
+<kw name="Send Command">
+<arg>get_status</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:04.448" endtime="20251116 14:20:04.449"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:04.449" endtime="20251116 14:20:04.451"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:04.952" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:04.451" endtime="20251116 14:20:04.952"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:04.953" endtime="20251116 14:20:04.954"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:04.445" endtime="20251116 14:20:04.954"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:04.957" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON
+</msg>
+<status status="PASS" starttime="20251116 14:20:04.955" endtime="20251116 14:20:04.957"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:04.958" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON</msg>
+<status status="PASS" starttime="20251116 14:20:04.958" endtime="20251116 14:20:04.958"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:04.960" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON</msg>
+<status status="PASS" starttime="20251116 14:20:04.958" endtime="20251116 14:20:04.960"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:04.960" endtime="20251116 14:20:04.961"/>
+</kw>
+<msg timestamp="20251116 14:20:04.961" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON</msg>
+<status status="PASS" starttime="20251116 14:20:04.954" endtime="20251116 14:20:04.961"/>
+</kw>
+<msg timestamp="20251116 14:20:04.961" level="INFO">${status} = LED_STATUS: BLUE=OFFRED=ONFAN_AND_BUZZER=ON</msg>
+<status status="PASS" starttime="20251116 14:20:04.444" endtime="20251116 14:20:04.962"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>BLUE=${expected_blue}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:04.962" endtime="20251116 14:20:04.962"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>RED=${expected_red}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:04.963" endtime="20251116 14:20:04.964"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAN_AND_BUZZER=${expected_fan_buzzer}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:04.964" endtime="20251116 14:20:04.964"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:04.442" endtime="20251116 14:20:04.965"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:02.891" endtime="20251116 14:20:04.966"/>
+</test>
+<test id="s1-t17" name="17 System Returns to Safe State" line="220">
+<kw name="Send Command">
+<arg>set_temp=28</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:04.970" endtime="20251116 14:20:04.971"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:04.971" endtime="20251116 14:20:04.972"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:05.474" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:04.972" endtime="20251116 14:20:05.474"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:05.474" endtime="20251116 14:20:05.475"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:04.970" endtime="20251116 14:20:05.475"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:05.479" level="INFO">${resp} = OK: Temp set to  28.0 C (MANUAL)
+</msg>
+<status status="PASS" starttime="20251116 14:20:05.477" endtime="20251116 14:20:05.479"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:05.479" level="INFO">${resp} = OK: Temp set to  28.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:05.479" endtime="20251116 14:20:05.479"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:05.480" level="INFO">${resp} = OK: Temp set to  28.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:05.479" endtime="20251116 14:20:05.480"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:05.481" endtime="20251116 14:20:05.481"/>
+</kw>
+<msg timestamp="20251116 14:20:05.482" level="INFO">${resp} = OK: Temp set to  28.0 C (MANUAL)</msg>
+<status status="PASS" starttime="20251116 14:20:05.476" endtime="20251116 14:20:05.482"/>
+</kw>
+<kw name="Verify Status">
+<arg>OFF</arg>
+<arg>OFF</arg>
+<arg>OFF</arg>
+<kw name="Get Status">
+<var>${status}</var>
+<kw name="Send Command">
+<arg>get_status</arg>
+<kw name="Flush Port" library="SerialLibrary">
+<arg>${PORT}</arg>
+<doc>Flush port so that all waiting data is processed.</doc>
+<status status="PASS" starttime="20251116 14:20:05.486" endtime="20251116 14:20:05.487"/>
+</kw>
+<kw name="Write Data" library="SerialLibrary">
+<arg>${cmd}${NEWLINE}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" starttime="20251116 14:20:05.487" endtime="20251116 14:20:05.490"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20251116 14:20:05.991" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20251116 14:20:05.490" endtime="20251116 14:20:05.991"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sent: ${cmd}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:05.992" endtime="20251116 14:20:05.992"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:05.485" endtime="20251116 14:20:05.993"/>
+</kw>
+<kw name="Read Response">
+<var>${resp}</var>
+<kw name="Read Until" library="SerialLibrary">
+<var>${resp}</var>
+<arg>${NEWLINE}</arg>
+<arg>timeout=${timeout}</arg>
+<doc>Read until a termination sequence is found, size exceeded or timeout.</doc>
+<msg timestamp="20251116 14:20:05.996" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF
+</msg>
+<status status="PASS" starttime="20251116 14:20:05.993" endtime="20251116 14:20:05.996"/>
+</kw>
+<kw name="Strip String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<msg timestamp="20251116 14:20:05.996" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:05.996" endtime="20251116 14:20:05.996"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${resp}</var>
+<arg>${resp}</arg>
+<arg>\r</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20251116 14:20:05.998" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:05.996" endtime="20251116 14:20:05.998"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Received: ${resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:05.998" endtime="20251116 14:20:05.998"/>
+</kw>
+<msg timestamp="20251116 14:20:05.999" level="INFO">${resp} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:05.993" endtime="20251116 14:20:05.999"/>
+</kw>
+<msg timestamp="20251116 14:20:05.999" level="INFO">${status} = LED_STATUS: BLUE=OFFRED=OFFFAN_AND_BUZZER=OFF</msg>
+<status status="PASS" starttime="20251116 14:20:05.484" endtime="20251116 14:20:05.999"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>BLUE=${expected_blue}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:06.000" endtime="20251116 14:20:06.000"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>RED=${expected_red}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:06.001" endtime="20251116 14:20:06.002"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${status}</arg>
+<arg>FAN_AND_BUZZER=${expected_fan_buzzer}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20251116 14:20:06.002" endtime="20251116 14:20:06.003"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:05.483" endtime="20251116 14:20:06.003"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:04.969" endtime="20251116 14:20:06.007"/>
+</test>
+<kw name="Close Serial Connection" type="TEARDOWN">
+<kw name="Delete All Ports" library="SerialLibrary">
+<doc>Deletes all ports maintained in the library instance.</doc>
+<status status="PASS" starttime="20251116 14:20:06.012" endtime="20251116 14:20:06.014"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Disconnected</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20251116 14:20:06.016" endtime="20251116 14:20:06.018"/>
+</kw>
+<status status="PASS" starttime="20251116 14:20:06.011" endtime="20251116 14:20:06.018"/>
+</kw>
+<doc>Human Machine Interface Test</doc>
+<status status="PASS" starttime="20251116 14:19:35.758" endtime="20251116 14:20:06.018"/>
+</suite>
+<statistics>
+<total>
+<stat pass="17" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="17" fail="0" skip="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
